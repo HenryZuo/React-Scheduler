@@ -7,16 +7,13 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import NewEvent from './NewEvent'
 
-// Events
-import events from './Events';
-
 // BigCalendar style
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 // BigCalendar requires one of two localizer options
 BigCalendar.momentLocalizer(moment);
 
-const Selectable = ({ onShowRodal, onHideRodal, rodalVisibility, newEventTime })=>{
+const Selectable = ({ events, onShowRodal, onHideRodal, onNewEventTime, rodalVisibility, newEventTime })=>{
   const onClickSlot = (slotInfo) => {
     onShowRodal();
     onNewEventTime(slotInfo);
@@ -34,7 +31,7 @@ const Selectable = ({ onShowRodal, onHideRodal, rodalVisibility, newEventTime })
         scrollToTime={new Date(1970, 1, 1)}
         defaultDate={new Date()}
         onSelectEvent={onShowRodal}
-        onSelectSlot={this.onClickSlot}
+        onSelectSlot={(slotInfo)=>{onClickSlot(slotInfo)}}
       />
       <NewEvent rodalVisibility={rodalVisibility} newEventTime={newEventTime}/>
     </div>
@@ -44,7 +41,8 @@ const Selectable = ({ onShowRodal, onHideRodal, rodalVisibility, newEventTime })
 const mapStateToProps = state => {
   return {
     rodalVisibility: state.rodalVisibility,
-    newEventTime: state.newEventTime
+    newEventTime: state.newEventTime,
+    events: state.events
   }
 }
 

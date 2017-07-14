@@ -1,11 +1,9 @@
+import initEvents from './Events';
 
-
-
-export default (state = [], action) => {
+export default (state = initEvents, action) => {
   switch (action.type) {
     case 'CREATE_NEW_EVENT':
-      action.eventObj
-      return action.slotInfo
+      return [...state, action.eventObj]
     default:
       return state
   }

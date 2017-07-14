@@ -7,7 +7,7 @@ import {Form, Input, Row} from 'formsy-react-components';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
-const NewEvent = ({ rodalVisibility, slotInfo, onHideRodal, createNewEvent })=>{
+const NewEvent = ({ rodalVisibility, slotInfo, onHideRodal, createNewEvent, events })=>{
   let formData = null;
 
   const submitForm = (data) => {
@@ -19,16 +19,11 @@ const NewEvent = ({ rodalVisibility, slotInfo, onHideRodal, createNewEvent })=>{
     };
     createNewEvent(eventObj);
   };
-//
-// 1. create mongodb doc
-// 2. save doc to mongodb
-// 3. after asyc save finish, get all docs from mongodb
-// 4. set new state to be all docs from mongodb
 
   return (
     <Rodal visible={rodalVisibility} onClose={onHideRodal} className={"p-4"}>
       <Form
-        onSubmit={this.submitForm}
+        onSubmit={(data)=>{submitForm(data)}}
         ref={(formTrack) => { formData = formTrack; }}
         layout={'horizontal'}
         >
@@ -49,7 +44,8 @@ const NewEvent = ({ rodalVisibility, slotInfo, onHideRodal, createNewEvent })=>{
 
 const mapStateToProps = state => {
   return {
-    slotInfo: state.slotInfo
+    slotInfo: state.slotInfo,
+    events: state.events
   }
 }
 

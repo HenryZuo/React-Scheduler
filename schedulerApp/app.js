@@ -9,6 +9,11 @@ import { Provider } from 'react-redux';
 // Components
 import Selectable from './components/Selectable';
 
+// Style
+const style = {
+  margin: '3em'
+};
+
 // Render
 ReactDOM.render(
   <Provider store={store}>
@@ -18,8 +23,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-// Style
-const style = {
-  margin: '1em'
-};
